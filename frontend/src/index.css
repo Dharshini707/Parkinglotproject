@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface-0 text-white font-body;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(20,179,113,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(66,197,245,0.04) 0%, transparent 50%);
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-surface-50; }
+  ::-webkit-scrollbar-thumb { @apply bg-brand-600 rounded-full; }
+}
+
+@layer components {
+  .glass {
+    background: rgba(20, 40, 32, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(20,179,113,0.15);
+  }
+
+  .glass-dark {
+    background: rgba(10, 15, 13, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(20,179,113,0.1);
+  }
+
+  .btn-primary {
+    @apply bg-brand-500 hover:bg-brand-400 text-white font-display font-semibold
+           px-6 py-3 rounded-xl transition-all duration-200
+           hover:shadow-[0_0_20px_rgba(20,179,113,0.4)]
+           active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply border border-brand-600/40 hover:border-brand-500 text-brand-400
+           hover:text-brand-300 font-display font-medium
+           px-6 py-3 rounded-xl transition-all duration-200
+           hover:bg-brand-900/30;
+  }
+
+  .input-field {
+    @apply bg-surface-100 border border-surface-300 focus:border-brand-500
+           text-white placeholder-gray-500 rounded-xl px-4 py-3
+           outline-none transition-all duration-200
+           focus:shadow-[0_0_0_3px_rgba(20,179,113,0.15)];
+  }
+
+  .card {
+    @apply glass rounded-2xl p-6 transition-all duration-300
+           hover:border-brand-500/30 hover:shadow-[0_8px_32px_rgba(20,179,113,0.08)];
+  }
+
+  .spot-available {
+    @apply bg-brand-500/20 border-2 border-brand-500 text-brand-400
+           rounded-xl cursor-pointer transition-all duration-200
+           hover:bg-brand-500/30 hover:scale-105;
+  }
+
+  .spot-occupied {
+    @apply bg-accent-red/10 border-2 border-accent-red/40 text-accent-red/60
+           rounded-xl cursor-not-allowed;
+  }
+
+  .spot-selected {
+    @apply bg-brand-500/40 border-2 border-brand-400 text-white
+           rounded-xl shadow-[0_0_20px_rgba(20,179,113,0.4)] scale-105;
+  }
+
+  .spot-reserved {
+    @apply bg-accent-yellow/10 border-2 border-accent-yellow/40 text-accent-yellow/60
+           rounded-xl cursor-not-allowed;
+  }
+
+  /* Leaflet overrides */
+  .leaflet-container {
+    background: #0a0f0d !important;
+    font-family: 'DM Sans', sans-serif !important;
+  }
+  .leaflet-popup-content-wrapper {
+    background: rgba(20,40,32,0.95) !important;
+    border: 1px solid rgba(20,179,113,0.3) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+  }
+  .leaflet-popup-tip { background: rgba(20,40,32,0.95) !important; }
+  .leaflet-popup-content { color: white !important; margin: 12px 16px !important; }
+  .leaflet-control-zoom a {
+    background: rgba(20,40,32,0.9) !important;
+    color: #14b371 !important;
+    border-color: rgba(20,179,113,0.3) !important;
+  }
+  .leaflet-control-zoom a:hover { background: rgba(20,40,32,1) !important; }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-400 via-brand-300 to-accent-blue bg-clip-text text-transparent;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(20,179,113,0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+df-messenger {
+  --df-messenger-bot-message: #020617;
+  --df-messenger-user-message: #22c55e;
+  --df-messenger-chat-background: #020617;
+  --df-messenger-font-color: #e2e8f0;
+
+  --df-messenger-send-icon: #22c55e;
+
+  --df-messenger-button-titlebar-color: #020617;
+  --df-messenger-button-titlebar-font-color: #22c55e;
+
+  --df-messenger-input-box-color: #020617;
+  --df-messenger-input-font-color: #e2e8f0;
+  --df-messenger-input-placeholder-font-color: #64748b;
+
+  --df-messenger-chat-border-radius: 16px;
+}
+
+/* Floating button */
+df-messenger::part(chat-bubble) {
+  background: linear-gradient(135deg, #22c55e, #14b8a6);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
+  animation: glow 2s infinite alternate;
+}
+
+/* Chat window */
+df-messenger::part(chat-wrapper) {
+  border-radius: 16px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(34, 197, 94, 0.2);
+}
+
+/* Messages */
+df-messenger::part(message) {
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/* Input box */
+df-messenger::part(input-box) {
+  border-top: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+/* Glow animation */
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px #22c55e;
+  }
+  to {
+    box-shadow: 0 0 20px #14b8a6;
+  }
+}
