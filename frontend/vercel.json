@@ -7,7 +7,7 @@
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "env": {
-    "VITE_APIBackend_URL": "@vite_apibackend_url",
+    "VITE_API_BACKEND_URL": "@vite_api_backend_url",
     "VITE_SOCKET_URL": "@vite_socket_url",
     "VITE_STRIPE_PUBLIC_KEY": "@vite_stripe_public_key"
   }
